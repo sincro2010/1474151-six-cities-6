@@ -4,8 +4,8 @@
   "private": true,
   "description": "Личный проект «Шесть городов» от HTML Academy",
   "scripts": {
-  "eslint": "eslint --ext .jsx --ext .js src/",
-  "test": "npm run eslint"
+    "eslint": "eslint --ext .jsx --ext .js src/",
+    "test": "npm run eslint"
   },
   "devDependencies": {
     "eslint": "7.18.0",
@@ -15,6 +15,7 @@
     "node": ">=12.0.0"
   },
   "dependencies": {
-    "eslint-plugin-react": "^7.22.0"
+    "eslint-plugin-react": "^7.22.0",
+    "webpack": "4.46.0"
   }
 }
