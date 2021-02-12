@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
 
-const CITY_NAME = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+const Setting = {
+    NUMBER_OF_PROPERTIES: 312
+  };
 
 ReactDOM.render(
     <App
-        cityName={CITY_NAME}
+        propertiesNumber={Setting.NUMBER_OF_PROPERTIES}
     />,
     document.querySelector(`#root`)
 );

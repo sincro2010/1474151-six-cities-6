@@ -2,10 +2,10 @@ import React from 'react';
 import MainPage from '../main-page/main-page';
 
 const App = (props) => {
-    const {cityName} = props;
+    const {propertiesNumber} = props;
 
     return  (
-        <MainPage cityName={cityName}/>
+        <MainPage propertiesNumber={propertiesNumber}/>
     );
 };
 
