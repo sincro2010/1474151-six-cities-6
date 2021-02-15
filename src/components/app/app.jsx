@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import Header from '../header/header';
 import MainPage from '../main-page/main-page';
-
-//import placeData from '../../mock/places.js';
 
 const App = (props) => {
     const {propertiesNumber} = props;
     const {placeData} = props;
 
     return  (
-        <MainPage propertiesNumber={propertiesNumber} places={placeData}/>
+        <React.Fragment>
+            <Header/>
+            <MainPage propertiesNumber={propertiesNumber} places={placeData}/>
+        </React.Fragment>
     );
 };
 
