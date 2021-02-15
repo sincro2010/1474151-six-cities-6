@@ -1,8 +1,10 @@
 import React from 'react';
-import Places from '../places/places';
+import PropTypes from "prop-types";
+import Place from "../place/place";
 
 const MainPage = (props) => {
     const {propertiesNumber} = props;
+    const {places} = props;
     
     return (
     <body>
@@ -76,7 +78,7 @@ const MainPage = (props) => {
             <div className="cities__places-container container">
                 <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{propertiesNumber} places to stay in Amsteldam</b>
+                <b className="places__found">{propertiesNumber} places to stay in Amsterdam</b>
                 <form className="places__sorting" action="#" method="get">
                     <span className="places__sorting-caption">Sort by</span>
                     <span className="places__sorting-type" tabIndex="0">
@@ -95,7 +97,21 @@ const MainPage = (props) => {
           
                     
                 <div className="cities__places-list places__list tabs__content">
-                    <Places/>
+                   
+                    {places.map((item, index) => {
+                    return (
+                    <Place
+                        key={index}
+                        title={item.title}
+                        image={item.image}
+                        type={item.type}
+                        price={item.price}
+                        rating={item.rating}
+                        isPremium={item.isPremium}
+                    />
+                    );
+                    })}
+                   
                 </div>
 
                 
@@ -110,6 +126,20 @@ const MainPage = (props) => {
     </body>
     );
 };
+
+MainPage.propTypes = {
+    propertiesNumber: PropTypes.number.isRequired,
+    places: PropTypes.arrayOf(
+        PropTypes.shape({
+            title: PropTypes.string.isRequired,
+            image: PropTypes.string.isRequired,
+            type: PropTypes.string.isRequired,
+            price: PropTypes.number.isRequired,
+            rating: PropTypes.number,
+            isPremium: PropTypes.bool
+        })
+    ).isRequired
+  };
 
 
 export default MainPage;
