@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from "prop-types";
-import Place from "../place/place";
+import PropTypes from 'prop-types';
+import Place from '../place/place';
 
 const MainPage = (props) => {
   const {propertiesNumber} = props;
