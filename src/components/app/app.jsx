@@ -10,8 +10,8 @@ const App = (props) => {
   return (
     <React.Fragment>
       <div className="page page--gray page--main">
-      <Header/>
-      <MainPage propertiesNumber={propertiesNumber} places={placeData}/>
+        <Header/>
+        <MainPage propertiesNumber={propertiesNumber} places={placeData}/>
       </div>
     </React.Fragment>
   );
