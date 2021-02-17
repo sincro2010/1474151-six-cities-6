@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Header from '../header/header';
 import Place from '../place/place';
 
 const MainPage = (props) => {
   const {propertiesNumber} = props;
   const {places} = props;
   return (
+    <div className="page page--gray page--main">
+    <Header/>
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
@@ -86,6 +89,7 @@ const MainPage = (props) => {
         </div>
       </div>
     </main>
+    </div>
   );
 };
 MainPage.propTypes = {

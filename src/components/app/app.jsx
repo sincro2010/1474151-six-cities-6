@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import Header from '../header/header';
 import MainPage from '../main-page/main-page';
 
 const App = (props) => {
@@ -9,10 +8,7 @@ const App = (props) => {
 
   return (
     <React.Fragment>
-      <div className="page page--gray page--main">
-        <Header/>
-        <MainPage propertiesNumber={propertiesNumber} places={placeData}/>
-      </div>
+      <MainPage propertiesNumber={propertiesNumber} places={placeData}/>
     </React.Fragment>
   );
 };
