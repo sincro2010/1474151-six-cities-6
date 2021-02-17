@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import MainPage from '../main-page/main-page';
 
 const App = (props) => {
