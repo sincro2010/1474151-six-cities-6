@@ -1,9 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Header from '../header/header';
 
 const Favorites = () => {
-  <div className="page">
+  return (
+    <div className="page">
       <Header/>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
@@ -40,7 +40,7 @@ const Favorites = () => {
                       </div>
                       <div className="place-card__rating rating">
                         <div className="place-card__stars rating__stars">
-                          <span style="width: 100%"></span>
+                          <span style={{width: `100%`}}></span>
                           <span className="visually-hidden">Rating</span>
                         </div>
                       </div>
@@ -72,7 +72,7 @@ const Favorites = () => {
                       </div>
                       <div className="place-card__rating rating">
                         <div className="place-card__stars rating__stars">
-                          <span style="width: 80%"></span>
+                          <span style={{width: `80%`}}></span>
                           <span className="visually-hidden">Rating</span>
                         </div>
                       </div>
@@ -115,7 +115,7 @@ const Favorites = () => {
                       </div>
                       <div className="place-card__rating rating">
                         <div className="place-card__stars rating__stars">
-                          <span style="width: 100%"></span>
+                          <span style={{width: `100%`}}></span>
                           <span className="visually-hidden">Rating</span>
                         </div>
                       </div>
@@ -137,5 +137,6 @@ const Favorites = () => {
         </a>
       </footer>
     </div>
+  );
 };
 export default Favorites;
