@@ -1,17 +1,36 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import Header from '../header/header';
+import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import Room from '../room/room';
+import SignIn from '../sign-in/sign-in';
+import Favorites from '../favorites/favorites';
 import MainPage from '../main-page/main-page';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 const App = (props) => {
   const {propertiesNumber} = props;
   const {placeData} = props;
 
   return (
-    <React.Fragment>
-      <Header/>
-      <MainPage propertiesNumber={propertiesNumber} places={placeData}/>
-    </React.Fragment>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <MainPage propertiesNumber={propertiesNumber} places={placeData} />
+        </Route>
+        <Route exact path="/login">
+          <SignIn />
+        </Route>
+        <Route exact path="/offer/:id?">
+          <Room />
+        </Route>
+        <Route exact path="/favorites">
+          <Favorites />
+        </Route>
+        <Route>
+          <NotFoundScreen />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 };
 

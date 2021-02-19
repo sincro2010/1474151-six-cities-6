@@ -49,7 +49,7 @@ const placeData = [
 ReactDOM.render(
     <App
       propertiesNumber={Setting.NUMBER_OF_PROPERTIES}
-      placeData = {placeData}
+      placeData={placeData}
     />,
     document.querySelector(`#root`)
 );
