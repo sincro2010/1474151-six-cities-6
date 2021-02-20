@@ -9,13 +9,13 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 const App = (props) => {
   const {propertiesNumber} = props;
-  const {placeData} = props;
+  const {offersData} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <MainPage propertiesNumber={propertiesNumber} places={placeData} />
+          <MainPage propertiesNumber={propertiesNumber} offers={offersData} />
         </Route>
         <Route exact path="/login">
           <SignIn />
@@ -36,7 +36,7 @@ const App = (props) => {
 
 App.propTypes = {
   propertiesNumber: PropTypes.number.isRequired,
-  placeData: PropTypes.arrayOf(
+  offersData: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
         image: PropTypes.string.isRequired,

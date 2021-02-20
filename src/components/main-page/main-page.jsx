@@ -5,7 +5,7 @@ import Place from '../place/place';
 
 const MainPage = (props) => {
   const {propertiesNumber} = props;
-  const {places} = props;
+  const {offers} = props;
   return (
     <div className="page page--gray page--main">
       <Header/>
@@ -68,7 +68,7 @@ const MainPage = (props) => {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {places.map((item, index) => {
+                {offers.map((item, index) => {
                   return (
                     <Place
                       key={index}
@@ -94,7 +94,7 @@ const MainPage = (props) => {
 };
 MainPage.propTypes = {
   propertiesNumber: PropTypes.number.isRequired,
-  places: PropTypes.arrayOf(
+  offers: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
         image: PropTypes.string.isRequired,
