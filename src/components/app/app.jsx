@@ -25,7 +25,7 @@ const App = (props) => {
           <Property />
         </Route>
         <Route exact path="/favorites">
-          <Favorites />
+          <Favorites offers={offersData}/>
         </Route>
         <Route>
           <NotFoundScreen />

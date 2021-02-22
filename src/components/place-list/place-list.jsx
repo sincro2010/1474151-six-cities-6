@@ -16,14 +16,8 @@ const PlaceList = (props) => {
     mouseOut={() => 
     setActivePlace(null)}
     isActivePlace={isActivePlace(place)}
-      key={place.id}
-      title={place.title}
-      previewImage={place.previewImage}
-      type={place.type}
-      price={place.price}
-      rating={place.rating}
-      isPremium={place.isPremium}
-      isFavorite={place.isFavorite}
+    key={place.id}
+    place={place}
     />
    ))}
  </div>
