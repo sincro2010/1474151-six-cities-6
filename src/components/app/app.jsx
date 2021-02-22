@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import placesPropTypes from '../../common/prop-types.js';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
-import Room from '../room/room';
+import Property from '../property/property';
 import SignIn from '../sign-in/sign-in';
 import Favorites from '../favorites/favorites';
 import MainPage from '../main-page/main-page';
@@ -21,7 +22,7 @@ const App = (props) => {
           <SignIn />
         </Route>
         <Route exact path="/offer/:id?">
-          <Room />
+          <Property />
         </Route>
         <Route exact path="/favorites">
           <Favorites />
@@ -36,16 +37,7 @@ const App = (props) => {
 
 App.propTypes = {
   propertiesNumber: PropTypes.number.isRequired,
-  offersData: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        rating: PropTypes.number,
-        isPremium: PropTypes.bool
-      })
-  ).isRequired
+  offersData: placesPropTypes
 };
 
 export default App;

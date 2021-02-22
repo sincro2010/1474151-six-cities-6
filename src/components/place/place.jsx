@@ -1,7 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import placesPropTypes from '../../common/prop-types.js';
 
 const Place = (props) => {
+
   return (
     <article className="cities__place-card place-card">
       {props.isPremium && (
@@ -11,7 +12,7 @@ const Place = (props) => {
       )}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={`img/${props.image}`} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src={`img/${props.previewImage}`} width="260" height="200" alt="Place image"/>
         </a>
       </div>
       <div className="place-card__info">
@@ -44,12 +45,7 @@ const Place = (props) => {
 };
 
 Place.propTypes = {
-  title: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  rating: PropTypes.number,
-  isPremium: PropTypes.bool
+  props: placesPropTypes
 };
 
 export default Place;

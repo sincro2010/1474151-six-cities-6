@@ -1,7 +1,10 @@
 import React from 'react';
 import Header from '../header/header';
+import placePropTypes from '../../common/prop-types.js';
 
-const Room = () => {
+const Property= (props) => {
+ 
+
   return (
     <div className="page">
       <Header/>
@@ -31,12 +34,13 @@ const Room = () => {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              <div className="property__mark">
+              {props.isPremium && (<div className="property__mark">
                 <span>Premium</span>
               </div>
+              )}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
-                  Beautiful &amp; luxurious studio at great location
+                   {props.title}
                 </h1>
                 <button className="property__bookmark-button button" type="button">
                   <svg className="property__bookmark-icon" width="31" height="33">
@@ -64,7 +68,7 @@ const Room = () => {
                 </li>
               </ul>
               <div className="property__price">
-                <b className="property__price-value">&euro;120</b>
+                <b className="property__price-value">&euro;{props.price}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
@@ -305,4 +309,8 @@ const Room = () => {
   );
 };
 
-export default Room;
+Property.propTypes = {
+  props: placePropTypes
+};
+
+export default Property;
