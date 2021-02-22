@@ -1,6 +1,6 @@
 import React from 'react';
-import placesPropTypes from '../../common/prop-types.js';
 import {useState} from 'react';
+import placesPropTypes from '../../common/prop-types.js';
 import Place from '../place/place';
 
 const PlaceList = (props) => {

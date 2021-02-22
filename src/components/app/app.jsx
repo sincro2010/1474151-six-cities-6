@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 import placesPropTypes from '../../common/prop-types.js';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
-import Property from '../property/property';
+import Room from '../room/room';
 import SignIn from '../sign-in/sign-in';
 import Favorites from '../favorites/favorites';
 import MainPage from '../main-page/main-page';
@@ -22,7 +22,7 @@ const App = (props) => {
           <SignIn />
         </Route>
         <Route exact path="/offer/:id?">
-          <Property />
+          <Room offers={offersData}/>
         </Route>
         <Route exact path="/favorites">
           <Favorites offers={offersData}/>

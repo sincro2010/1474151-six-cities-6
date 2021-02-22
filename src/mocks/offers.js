@@ -16,7 +16,7 @@ export default [
     host: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
       id: 3,
-      isPro: true,
+      isPro: false,
       name: `Angelina`
     },
     id: 1,
