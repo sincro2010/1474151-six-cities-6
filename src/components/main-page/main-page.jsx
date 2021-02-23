@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../header/header';
-import Place from '../place/place';
+import PlaceList from '../place-list/place-list';
+import placesPropTypes from '../../common/prop-types.js';
 
 const MainPage = (props) => {
   const {propertiesNumber} = props;
-  const {places} = props;
+  const {offers} = props;
   return (
     <div className="page page--gray page--main">
       <Header/>
@@ -67,21 +68,7 @@ const MainPage = (props) => {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {places.map((item, index) => {
-                  return (
-                    <Place
-                      key={index}
-                      title={item.title}
-                      image={item.image}
-                      type={item.type}
-                      price={item.price}
-                      rating={item.rating}
-                      isPremium={item.isPremium}
-                    />
-                  );
-                })}
-              </div>
+                <PlaceList offers={offers} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
@@ -94,16 +81,7 @@ const MainPage = (props) => {
 };
 MainPage.propTypes = {
   propertiesNumber: PropTypes.number.isRequired,
-  places: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        rating: PropTypes.number,
-        isPremium: PropTypes.bool
-      })
-  ).isRequired
+  offers: placesPropTypes
 };
 
 
