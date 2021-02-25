@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import placesPropTypes from '../../common/prop-types.js';
 import Header from '../header/header';
 import PlaceList from '../place-list/place-list';
-import Map from '../map/map';
 
 const MainPage = (props) => {
   const {propertiesNumber} = props;
@@ -71,9 +70,7 @@ const MainPage = (props) => {
               </form>
               <PlaceList offers={offers} />
             </section>
-            <section className="cities__map map">
-              <Map offers={offers}/>
-            </section>
+            <section className="cities__map map"></section>
           </div>
         </div>
       </main>

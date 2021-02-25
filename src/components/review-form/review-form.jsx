@@ -2,7 +2,7 @@ import React from 'react';
 import {useState} from 'react';
 import {placesPropTypes, reviewsPropTypes} from '../../common/prop-types.js';
 
-const ReviewForm = (props) => {
+const ReviewForm = () => {
   const [commentForm, setCommentForm] = useState({
     rating: 0,
     review: ``
@@ -16,9 +16,6 @@ const ReviewForm = (props) => {
     const {name, value} = evt.target;
     setCommentForm({...commentForm, [name]: value});
   };
-
-  const {rating, review} = commentForm;
-
 
   return (
     <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>

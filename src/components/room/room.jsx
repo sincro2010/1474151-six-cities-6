@@ -1,11 +1,11 @@
 import React from 'react';
 import {useParams} from 'react-router-dom';
-import {placesPropTypes, reviewsPropTypes} from '../../common/prop-types.js';
+import {placesPropTypes} from '../../common/prop-types.js';
 import Header from '../header/header';
 import ReviewForm from '../review-form/review-form';
 
 const Room = (props) => {
-  const {offers, reviews} = props;
+  const {offers} = props;
   const {id} = useParams();
   const place = offers.find((offer) => +offer.id === +id);
 
@@ -246,7 +246,6 @@ const Room = (props) => {
 };
 
 Room.propTypes = {
-  reviews: reviewsPropTypes,
   offers: placesPropTypes
 };
 

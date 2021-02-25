@@ -12,7 +12,7 @@ const FavoritePlace = (props) => {
     title,
     type
   } = place;
-  
+
   return (
     <article className="favorites__card place-card" key={id}>
       <div className="favorites__image-wrapper place-card__image-wrapper">

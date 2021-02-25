@@ -56,7 +56,7 @@ const Place = (props) => {
 };
 
 Place.propTypes = {
-  props: placePropTypes,
+  place: placePropTypes
 };
 
 export default Place;

@@ -1,10 +1,7 @@
-import React, {createRef} from 'react';
+/* import React, {createRef} from 'react';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import placesPropTypes from '../../common/prop-types.js';
-
-
-
 
 const Map = (props) => {
   const {offers} = props;
@@ -13,7 +10,6 @@ const Map = (props) => {
 
   const city = [52.38333, 4.9];
   const zoom = 12;
-
 
   const map = leaflet.map(`map`, {
     center: city,
@@ -50,4 +46,4 @@ Map.propTypes = {
   offers: placesPropTypes
 };
 
-export default Map;
+export default Map; */
