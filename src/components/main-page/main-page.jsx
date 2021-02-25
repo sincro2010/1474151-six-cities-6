@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import placesPropTypes from '../../common/prop-types.js';
 import Header from '../header/header';
 import PlaceList from '../place-list/place-list';
-import placesPropTypes from '../../common/prop-types.js';
+import Map from '../map/map';
 
 const MainPage = (props) => {
   const {propertiesNumber} = props;
@@ -68,11 +69,11 @@ const MainPage = (props) => {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-                <PlaceList offers={offers} />
+              <PlaceList offers={offers} />
             </section>
-            <div className="cities__right-section">
-              <section className="cities__map map"></section>
-            </div>
+            <section className="cities__map map">
+              <Map offers={offers}/>
+            </section>
           </div>
         </div>
       </main>

@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../header/header';
 import FavoritesCity from './favorites-city';
+import placesPropTypes from '../../common/prop-types.js';
 
 const Favorites = (props) => {
   const {offers} = props;
@@ -9,8 +10,8 @@ const Favorites = (props) => {
   const favoriteCitiesList = [];
   favoritePlaces.forEach((favoritePlace) => favoriteCitiesList.push(favoritePlace.city.name));
   const favoriteCities = Array.from(new Set(favoriteCitiesList));
-  console.log(favoritePlaces);
-console.log(favoriteCities);
+  /* console.log(favoritePlaces);*/
+  /* console.log(favoriteCities);*/
   return (
     <div className="page">
       <Header/>
@@ -22,11 +23,11 @@ console.log(favoriteCities);
               {favoriteCities.map((city, index) => {
                 const PlacesInFavoriteCity = favoritePlaces.filter((place) => place.city.name === city);
                 return (
-                <FavoritesCity
-                  key={index}
-                  offers={PlacesInFavoriteCity}
-                  city={city}
-                />
+                  <FavoritesCity
+                    key={index}
+                    offers={PlacesInFavoriteCity}
+                    city={city}
+                  />
                 );
               })}
             </ul>
@@ -41,4 +42,9 @@ console.log(favoriteCities);
     </div>
   );
 };
+
+Favorites.propTypes = {
+  offers: placesPropTypes
+};
+
 export default Favorites;

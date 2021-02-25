@@ -23,7 +23,6 @@ const Room = (props) => {
     title,
     type
   } = place;
-  console.log(offers);
 
   return (
     <div className="page">
@@ -33,8 +32,8 @@ const Room = (props) => {
           <div className="property__gallery-container container">
             <div className="property__gallery">
               {images.map((image) =>
-                <div className="property__image-wrapper">
-                   <img className="property__image" src={`${image}`} alt="Photo studio"/>
+                <div key={`${image.index}`} className="property__image-wrapper">
+                  <img className="property__image" src={`${image}`} alt="Photo studio"/>
                 </div>
               )}
             </div>
@@ -47,9 +46,9 @@ const Room = (props) => {
               )}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
-                   {title}
+                  {title}
                 </h1>
-                <button className={`property__bookmark-button ${isFavorite ? `property__bookmark-button--active` : ``} button`} type="button">
+                <button className={`property__bookmark-button ${isFavorite && `property__bookmark-button--active`} button`} type="button">
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
@@ -61,17 +60,17 @@ const Room = (props) => {
                   <span style={{width: `${rating}%`}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="property__rating-value rating__value">{rating/20}</span>
+                <span className="property__rating-value rating__value">{rating / 20}</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
                   {type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                  {bedrooms} Bedroom{bedrooms > 1 ? `s` : ``}
+                  {bedrooms} Bedroom{bedrooms > 1 && `s`}
                 </li>
                 <li className="property__feature property__feature--adults">
-                  Max {maxAdults} adult{maxAdults > 1 ? `s` : ``}
+                  Max {maxAdults} adult{maxAdults > 1 && `s`}
                 </li>
               </ul>
               <div className="property__price">
@@ -82,14 +81,16 @@ const Room = (props) => {
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
                   {goods.map((good) => (
-                   <li className="property__inside-item">{good}</li>
-                 ))}
+                    <li key={`${good.index}`} className="property__inside-item">
+                      {good}
+                    </li>
+                  ))}
                 </ul>
               </div>
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className={`property__avatar-wrapper ${host.isPro ? `property__avatar-wrapper--pro` : ``} user__avatar-wrapper`}>
+                  <div className={`property__avatar-wrapper ${host.isPro && `property__avatar-wrapper--pro`} user__avatar-wrapper`}>
                     <img className="property__avatar user__avatar" src={`${host.avatarUrl}`} width="74" height="74" alt="Host avatar"/>
                   </div>
                   <span className="property__user-name">
