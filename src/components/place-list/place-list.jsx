@@ -6,7 +6,7 @@ const PlaceList = (props) => {
   const {offers} = props;
   const [activePlace, setActivePlace] = useState(false);
   const isActivePlace = (place) => place.id === activePlace;
- 
+
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((place) => (

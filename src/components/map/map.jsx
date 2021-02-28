@@ -1,22 +1,22 @@
-import React, { useRef, useEffect } from 'react';
+import React, {useRef, useEffect} from 'react';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {placesPropTypes} from '../../common/prop-types.js';
 
 const Map = (props) => {
-  const { offers } = props;
+  const {offers} = props;
   const mapRef = useRef();
+  const city = [52.38333, 4.9];
+  const zoom = 12;
 
-    const city = [52.38333, 4.9];
-    const zoom = 12;
+  const icon = leaflet.icon({
+    iconUrl: `img/pin.svg`,
+    iconSize: [30, 30]
+  });
 
-    const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
-      iconSize: [30, 30]
-    });
+  let map;
 
-    useEffect (() => {
-console.log(mapRef.current);
+  useEffect(() => {
     map = leaflet.map(`map`, {
       center: city,
       zoom,
@@ -31,19 +31,19 @@ console.log(mapRef.current);
      })
      .addTo(map);
 
-  offers.map((place) => {
-    leaflet
-    .marker({
-      lat: place.location.latitude, 
-      lng: place.location.longitude},
-      { icon })
+    offers.map((place) => {
+      leaflet
+      .marker({
+        lat: place.location.latitude,
+        lng: place.location.longitude},
+      {icon})
     .addTo(map);
+    });
+
   });
 
-});
-  
   return (
-    <div id="map" ref={mapRef} style={{ height: `100%`, width: `100%` }}></div>
+    <div id="map" ref={mapRef} style={{height: `100%`, width: `100%`}}></div>
   );
 };
 
