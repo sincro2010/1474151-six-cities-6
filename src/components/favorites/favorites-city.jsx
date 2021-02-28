@@ -1,5 +1,5 @@
 import React from 'react';
-import placesPropTypes from '../../common/prop-types.js';
+import {placesPropTypes} from '../../common/prop-types.js';
 import FavoritePlace from './favorite-place.jsx';
 
 const FavoritesCity = (props) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import placesPropTypes from '../../common/prop-types.js';
+import {placesPropTypes} from '../../common/prop-types.js';
 import Header from '../header/header';
 import PlaceList from '../place-list/place-list';
 import Map from '../map/map';
