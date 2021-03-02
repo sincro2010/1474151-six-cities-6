@@ -7,7 +7,7 @@ import {PlaceSettings} from '../../common/const';
 
 
 const Place = (props) => {
-  const {place, placeName} = props;
+  const {place, placeName, isActivePlace, mouseOver, mouseOut} = props;
   const {
     id,
     isPremium,
@@ -20,7 +20,7 @@ const Place = (props) => {
   } = place;
 
   return (
-    <article className={`${PlaceSettings[placeName].article} place-card`}>
+    <article className={`${PlaceSettings[placeName].article} place-card ${isActivePlace && `place-card--active`}`} onMouseOver={mouseOver} onMouseOut={mouseOut}>
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>

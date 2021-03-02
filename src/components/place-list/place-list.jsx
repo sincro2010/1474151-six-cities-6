@@ -13,7 +13,7 @@ const PlaceList = (props) => {
       {offers.map((place) => (
         <Place
           mouseOver={() =>
-            activePlace(place.id)}
+            setActivePlace(place.id)}
           mouseOut={() =>
             setActivePlace(null)}
           isActivePlace={isActivePlace(place)}
