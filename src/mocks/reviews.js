@@ -16,7 +16,7 @@ export default [
     comment: `Bad.`,
     date: `2020-04-08T14:12:56.569Z`,
     id: 2,
-    rating: 5,
+    rating: 1,
     user: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
       id: 2,
@@ -27,7 +27,7 @@ export default [
     comment: `It's OK`,
     date: `2020-05-08T14:13:56.569Z`,
     id: 3,
-    rating: 4,
+    rating: 3,
     user: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
       id: 3,

@@ -40,6 +40,9 @@ const Map = (props) => {
     .addTo(map);
     });
 
+    return () => {
+      map.remove();
+    };
   });
 
   return (

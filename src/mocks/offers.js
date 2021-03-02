@@ -31,7 +31,7 @@ export default [
     maxAdults: 4,
     previewImage: `apartment-01.jpg`,
     price: 120,
-    rating: 95,
+    rating: 4.8,
     title: `Beautiful & luxurious studio at great location`,
     type: `Аpartment`
   }, {
@@ -64,7 +64,7 @@ export default [
     maxAdults: 3,
     previewImage: `room.jpg`,
     price: 80,
-    rating: 75,
+    rating: 3.7,
     title: `Wood and stone place`,
     type: `Private room`
   }, {
@@ -97,7 +97,7 @@ export default [
     maxAdults: 3,
     previewImage: `apartment-02.jpg`,
     price: 132,
-    rating: 80,
+    rating: 3,
     title: `Canal View Prinsengracht`,
     type: `Apartment`
   }, {
@@ -130,7 +130,7 @@ export default [
     maxAdults: 3,
     previewImage: `apartment-03.jpg`,
     price: 180,
-    rating: 100,
+    rating: 5,
     title: `Nice, cozy, warm big bed apartment`,
     type: `Apartment`
   }

@@ -1,9 +1,13 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {placePropTypes} from '../../common/prop-types.js';
+import {getNumberOfStars} from '../../common/utils.js';
+import {PlaceSettings} from '../../common/const';
+
 
 const Place = (props) => {
-  const {place} = props;
+  const {place, placeName} = props;
   const {
     id,
     isPremium,
@@ -16,18 +20,18 @@ const Place = (props) => {
   } = place;
 
   return (
-    <article className="cities__place-card place-card">
+    <article className={`${PlaceSettings[placeName].article} place-card`}>
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       )}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${PlaceSettings[placeName].image.imageClass} place-card__image-wrapper`}>
         <Link to={`/offer/` + id}>
-          <img className="place-card__image" src={`img/${previewImage}`} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src={`img/${previewImage}`} width={`${PlaceSettings[placeName].image.width}`} height={`${PlaceSettings[placeName].image.height}`} alt="Place image"/>
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className={`${PlaceSettings[placeName].info} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -42,7 +46,7 @@ const Place = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${rating}%`}}></span>
+            <span style={{width: getNumberOfStars(rating)}}></span>
             <span className="visually-hidden">{rating}</span>
           </div>
         </div>
@@ -56,7 +60,8 @@ const Place = (props) => {
 };
 
 Place.propTypes = {
-  place: placePropTypes
+  place: placePropTypes,
+  placeName: PropTypes.string.isRequired
 };
 
 export default Place;

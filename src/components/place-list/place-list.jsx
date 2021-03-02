@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
 import {placesPropTypes} from '../../common/prop-types.js';
 import Place from '../place/place';
 
 const PlaceList = (props) => {
-  const {offers} = props;
+  const {offers, placeName} = props;
   const [activePlace, setActivePlace] = useState(false);
   const isActivePlace = (place) => place.id === activePlace;
 
@@ -18,6 +19,7 @@ const PlaceList = (props) => {
           isActivePlace={isActivePlace(place)}
           key={place.id}
           place={place}
+          placeName={placeName}
         />
       ))}
     </div>
@@ -25,7 +27,8 @@ const PlaceList = (props) => {
 };
 
 PlaceList.propTypes = {
-  offers: placesPropTypes
+  offers: placesPropTypes,
+  placeName: PropTypes.string.isRequired
 };
 
 export default PlaceList;

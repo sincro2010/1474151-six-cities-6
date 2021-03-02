@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import placesPropTypes from '../../common/prop-types.js';
+import {placesPropTypes, reviewsPropTypes} from '../../common/prop-types.js';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import Room from '../room/room';
 import SignIn from '../sign-in/sign-in';
@@ -9,8 +9,7 @@ import MainPage from '../main-page/main-page';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 const App = (props) => {
-  const {propertiesNumber} = props;
-  const {offersData} = props;
+  const {propertiesNumber, offersData, reviewsData} = props;
 
   return (
     <BrowserRouter>
@@ -22,7 +21,7 @@ const App = (props) => {
           <SignIn />
         </Route>
         <Route exact path="/offer/:id?">
-          <Room offers={offersData}/>
+          <Room offers={offersData} reviews={reviewsData} />
         </Route>
         <Route exact path="/favorites">
           <Favorites offers={offersData}/>
@@ -37,7 +36,8 @@ const App = (props) => {
 
 App.propTypes = {
   propertiesNumber: PropTypes.number.isRequired,
-  offersData: placesPropTypes
+  offersData: placesPropTypes,
+  reviewsData: reviewsPropTypes
 };
 
 export default App;
