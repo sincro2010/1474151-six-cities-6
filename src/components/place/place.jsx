@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import placePropTypes from '../../common/prop-types.js';
+import {placePropTypes} from '../../common/prop-types.js';
 
 const Place = (props) => {
   const {place} = props;

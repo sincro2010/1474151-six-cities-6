@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../header/header';
 import FavoritesCity from './favorites-city';
-import placesPropTypes from '../../common/prop-types.js';
+import {placesPropTypes} from '../../common/prop-types.js';
 
 const Favorites = (props) => {
   const {offers} = props;
