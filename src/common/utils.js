@@ -7,3 +7,8 @@ export const getNumberOfStars = (rating) => {
 export const getPluralaze = (param) => {
   return `${param > 1 && `s`}`;
 };
+
+export const getOffersInCity = (offers, selectedCity) => {
+  return offers.filter((place) => place.city.name === selectedCity);
+};
+
