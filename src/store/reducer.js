@@ -1,4 +1,5 @@
 import {ActionType} from './action';
+import offers from '../mocks/offers';
 import {DEFAULT_CITY} from '../common/const';
 import {getOffersInCity} from '../common/utils';
 
