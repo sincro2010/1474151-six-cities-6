@@ -2,7 +2,6 @@ export const AVATAR_URL = `https://i.pravatar.cc/128`;
 
 export const MAX_NUMBER_STARS = 5;
 export const MAX_NUMBER_PIN = 3;
-export const DEFAULT_CITY = `Paris`;
 
 export const PlaceSettings = {
   MAIN: {
@@ -33,3 +32,7 @@ export const PlaceSettings = {
     info: `favorites__card-info`
   }
 };
+
+export const CITIES = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
+export const DEFAULT_CITY = CITIES[0];
+

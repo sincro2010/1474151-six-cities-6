@@ -8,19 +8,14 @@ import {Provider} from 'react-redux';
 import {reducer} from './store/reducer';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
-const Setting = {
-  NUMBER_OF_PROPERTIES: 312
-};
-
 const store = createStore(reducer, composeWithDevTools());
 
 ReactDOM.render(
-  <Provider store={store}>
-     <App
-      propertiesNumber={Setting.NUMBER_OF_PROPERTIES}
-      offersData={offersData}
-      reviewsData={reviewsData}
-    />
-  </Provider>,
-  document.querySelector(`#root`)
+    <Provider store={store}>
+      <App
+        offersData={offersData}
+        reviewsData={reviewsData}
+      />
+    </Provider>,
+    document.querySelector(`#root`)
 );

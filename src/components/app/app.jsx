@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from "prop-types";
 import {placesPropTypes, reviewsPropTypes} from '../../common/prop-types.js';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import Room from '../room/room';
@@ -9,13 +8,13 @@ import MainPage from '../main-page/main-page';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 const App = (props) => {
-  const {propertiesNumber, offersData, reviewsData} = props;
+  const {offersData, reviewsData} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <MainPage propertiesNumber={propertiesNumber} offers={offersData} />
+          <MainPage offers={offersData} />
         </Route>
         <Route exact path="/login">
           <SignIn />
@@ -35,7 +34,6 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  propertiesNumber: PropTypes.number.isRequired,
   offersData: placesPropTypes,
   reviewsData: reviewsPropTypes
 };

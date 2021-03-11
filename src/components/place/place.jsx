@@ -61,7 +61,10 @@ const Place = (props) => {
 
 Place.propTypes = {
   place: placePropTypes,
-  placeName: PropTypes.string.isRequired
+  placeName: PropTypes.string.isRequired,
+  isActivePlace: PropTypes.func.isRequired,
+  mouseOver: PropTypes.func.isRequired,
+  mouseOut: PropTypes.func.isRequired
 };
 
 export default Place;
