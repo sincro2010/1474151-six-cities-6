@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {placePropTypes} from '../../common/prop-types.js';
+import {getNumberOfStars} from '../../common/utils.js';
 
 const FavoritePlace = (props) => {
   const {place} = props;
@@ -35,7 +36,7 @@ const FavoritePlace = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${rating}%`}}></span>
+            <span style={{width: getNumberOfStars(rating)}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

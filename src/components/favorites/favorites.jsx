@@ -10,8 +10,7 @@ const Favorites = (props) => {
   const favoriteCitiesList = [];
   favoritePlaces.forEach((favoritePlace) => favoriteCitiesList.push(favoritePlace.city.name));
   const favoriteCities = Array.from(new Set(favoriteCitiesList));
-  /* console.log(favoritePlaces);*/
-  /* console.log(favoriteCities);*/
+
   return (
     <div className="page">
       <Header/>
@@ -27,6 +26,7 @@ const Favorites = (props) => {
                     key={index}
                     offers={PlacesInFavoriteCity}
                     city={city}
+                    placeName="FAVORITES"
                   />
                 );
               })}
@@ -44,7 +44,7 @@ const Favorites = (props) => {
 };
 
 Favorites.propTypes = {
-  offers: placesPropTypes
+  offers: placesPropTypes,
 };
 
 export default Favorites;
