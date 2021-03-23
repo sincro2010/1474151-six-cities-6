@@ -1,21 +1,31 @@
 import React, {useEffect} from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
+import PropTypes from 'prop-types';
 import {placesPropTypes} from '../../common/prop-types.js';
 import Header from '../header/header';
+import {fetchPlaceList} from "../../store/api-actions";
 import PlaceList from '../place-list/place-list';
 import CityList from '../city-list/city-list';
 import MainEmptyPage from '../main-empty-page/main-empty-page';
 import Map from '../map/map';
+import {getOffersInCity} from '../../common/utils';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 const MainPage = (props) => {
 
-  const {offers, activeCity, onMainPageRender} = props;
+  const {offers, activeCity, onMainPageRender, isDataLoaded} = props;
 
   useEffect(() => {
-    onMainPageRender();
+    if (!isDataLoaded) {
+      onMainPageRender();
+    }
   }, [activeCity]);
+
+  if (!isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <div className="page page--gray page--main">
@@ -51,7 +61,7 @@ const MainPage = (props) => {
                 <PlaceList offers={offers} placeName="MAIN"/>
               </section>
               <div className="cities__right-section">
-                <section className="cities__map map"><Map offers={offers}/></section>
+                <section className="cities__map map"><Map offers={offers} /></section>
               </div>
             </div>
             : <MainEmptyPage activeCity={activeCity} />};
@@ -61,21 +71,24 @@ const MainPage = (props) => {
   );
 };
 
+
 const mapStateToProps = (state) => ({
-  offers: state.offers,
+  offers: getOffersInCity(state.offers, state.activeCity),
   activeCity: state.activeCity,
+  isDataLoaded: state.isDataLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onMainPageRender() {
-    dispatch(ActionCreator.getOffers());
+    dispatch(fetchPlaceList());
   },
 });
 
 MainPage.propTypes = {
   offers: placesPropTypes,
   activeCity: PropTypes.string.isRequired,
-  onMainPageRender: PropTypes.func.isRequired
+  onMainPageRender: PropTypes.func.isRequired,
+  isDataLoaded: PropTypes.bool.isRequired
 };
 
 export {MainPage};

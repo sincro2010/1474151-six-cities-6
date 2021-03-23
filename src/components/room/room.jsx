@@ -1,20 +1,41 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import PropTypes from 'prop-types';
 import {useParams} from 'react-router-dom';
-import {placesPropTypes, reviewsPropTypes} from '../../common/prop-types.js';
+import {connect} from 'react-redux';
+import {placesPropTypes, reviewsPropTypes, placePropTypes} from '../../common/prop-types.js';
 import Header from '../header/header';
 import ReviewForm from '../review-form/review-form';
 import ReviewsList from '../reviews-list/reviews-list';
-import {MAX_NUMBER_PIN} from '../../common/const';
+import {MAX_NUMBER_PIN, MAX_PROPERTY_IMAGES} from '../../common/const';
 import PlaceList from '../place-list/place-list';
 import Map from '../map/map';
 import {getNumberOfStars, getPluralaze} from '../../common/utils.js';
+import {fetchRoomReviews, fetchNearOffers, fetchRoom} from "../../store/api-actions";
+import LoadingScreen from '../loading-screen/loading-screen';
 
 
 const Room = (props) => {
-  const {offers, reviews} = props;
+  const {reviews, nearOffers, onRoomReviewsRender, areReviewsLoaded, onRoomNearOffersRender, areNearOffersLoaded, isPropertyLoaded, place, onPlaceRender} = props;
+ 
+
   const {id} = useParams();
-  const place = offers.find((offer) => offer.id == id);
-  const getNearPlaces = offers.filter((offer) => (offer.id != id));
+ 
+
+  useEffect(() => {
+    if (!areReviewsLoaded) {
+      onRoomReviewsRender(id);
+    }
+    if (!areNearOffersLoaded) {
+      onRoomNearOffersRender(id);
+    }
+    if (!isPropertyLoaded) {
+      onPlaceRender(id);
+    }
+  }, [id]);
+
+  if (!areReviewsLoaded && !areNearOffersLoaded && !isPropertyLoaded) {
+    return <LoadingScreen />;
+  }
 
   const {
     bedrooms,
@@ -30,6 +51,7 @@ const Room = (props) => {
     title,
     type
   } = place;
+  
 
   return (
     <div className="page">
@@ -38,11 +60,13 @@ const Room = (props) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {images.map((image, ind) =>
-                <div key={`${image}-${ind}`} className="property__image-wrapper">
-                  <img className="property__image" src={`${image}`} alt="Photo studio"/>
-                </div>
-              )}
+              {images.slice(0, MAX_PROPERTY_IMAGES).map((image, ind) => {
+                return (
+                  <div key={`${image}-${ind}`} className="property__image-wrapper">
+                    <img className="property__image" src={image} alt="Photo studio"/>
+                  </div>
+                );
+              })}
             </div>
           </div>
           <div className="property__container container">
@@ -123,13 +147,13 @@ const Room = (props) => {
               </section>
             </div>
           </div>
-          <section className="property__map map"><Map offers={getNearPlaces.slice(0, MAX_NUMBER_PIN)} /></section>
+          <section className="property__map map"><Map offers={nearOffers.slice(0, MAX_NUMBER_PIN)} /></section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <PlaceList offers={getNearPlaces.slice(0, MAX_NUMBER_PIN)} placeName="NEAR"/>
+              <PlaceList offers={nearOffers.slice(0, MAX_NUMBER_PIN)} placeName="NEAR"/>
             </div>
           </section>
         </div>
@@ -138,9 +162,38 @@ const Room = (props) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+  reviews: state.reviews,
+  areReviewsLoaded: state.areReviewsLoaded,
+  nearOffers: state.nearOffers,
+  areNearOffersLoaded: state.areNearOffersLoaded,
+  place: state.place,
+  isPropertyLoaded: state.isPropertyLoaded
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onRoomReviewsRender(id) {
+    dispatch(fetchRoomReviews(id));
+  },
+  onRoomNearOffersRender(id) {
+    dispatch(fetchNearOffers(id));
+  },
+  onPlaceRender(id) {
+    dispatch(fetchRoom(id));
+  },
+});
+
 Room.propTypes = {
   offers: placesPropTypes,
-  reviews: reviewsPropTypes
+  reviews: reviewsPropTypes,
+  nearOffers: placesPropTypes,
+  areReviewsLoaded: PropTypes.bool.isRequired,
+  onRoomReviewsRender: PropTypes.func.isRequired,
+  areNearOffersLoaded: PropTypes.bool.isRequired,
+  onRoomNearOffersRender:  PropTypes.func.isRequired,
+  isPropertyLoaded: PropTypes.bool.isRequired,
 };
 
-export default Room;
+export {Room};
+export default connect(mapStateToProps, mapDispatchToProps)(Room);

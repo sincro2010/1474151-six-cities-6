@@ -6,7 +6,7 @@ import Place from '../place/place';
 const PlaceList = (props) => {
   const {offers, placeName} = props;
   const [activePlace, setActivePlace] = useState(false);
-  const isActivePlace = (place) => place.id === activePlace;
+  const isActivePlace = (place) => {place.id === activePlace};
 
   return (
     <div className="cities__places-list places__list tabs__content">
@@ -28,7 +28,8 @@ const PlaceList = (props) => {
 
 PlaceList.propTypes = {
   offers: placesPropTypes,
-  placeName: PropTypes.string.isRequired
+  placeName: PropTypes.string.isRequired,
+  isActivePlace: PropTypes.bool
 };
 
 export default PlaceList;

@@ -28,7 +28,7 @@ const Place = (props) => {
       )}
       <div className={`${PlaceSettings[placeName].image.imageClass} place-card__image-wrapper`}>
         <Link to={`/offer/` + id}>
-          <img className="place-card__image" src={`img/${previewImage}`} width={`${PlaceSettings[placeName].image.width}`} height={`${PlaceSettings[placeName].image.height}`} alt="Place image"/>
+          <img className="place-card__image" src={previewImage} width={`${PlaceSettings[placeName].image.width}`} height={`${PlaceSettings[placeName].image.height}`} alt="Place image"/>
         </Link>
       </div>
       <div className={`${PlaceSettings[placeName].info} place-card__info`}>
@@ -62,7 +62,7 @@ const Place = (props) => {
 Place.propTypes = {
   place: placePropTypes,
   placeName: PropTypes.string.isRequired,
-  isActivePlace: PropTypes.func.isRequired,
+  isActivePlace: PropTypes.bool,
   mouseOver: PropTypes.func.isRequired,
   mouseOut: PropTypes.func.isRequired
 };

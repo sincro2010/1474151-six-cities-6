@@ -48,7 +48,7 @@ const Map = (props) => {
     return () => {
       map.remove();
     };
-  }, [offers]);
+  }, [offers, activeCity]);
 
   return (
     <div id="map" ref={mapRef} style={{height: `100%`, width: `100%`}}></div>
