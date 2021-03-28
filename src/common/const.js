@@ -35,7 +35,6 @@ export const PlaceSettings = {
 };
 
 export const CITIES = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
-export const DEFAULT_CITY = CITIES[0];
 
 export const AuthorizationStatus = {
   AUTH: `auth`,

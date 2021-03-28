@@ -7,8 +7,7 @@ import Favorites from '../favorites/favorites';
 import MainPage from '../main-page/main-page';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
-const App = (props) => {
-  const {offersData, reviewsData} = props;
+const App = () => {
 
   return (
     <BrowserRouter>
@@ -20,7 +19,7 @@ const App = (props) => {
           <SignIn />
         </Route>
         <Route exact path="/offer/:id?">
-          <Room offers={offersData} reviews={reviewsData} />
+          <Room />
         </Route>
         <Route exact path="/favorites">
           <Favorites />

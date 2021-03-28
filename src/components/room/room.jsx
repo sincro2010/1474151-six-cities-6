@@ -2,11 +2,11 @@ import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {useParams} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {placesPropTypes, reviewsPropTypes, placePropTypes} from '../../common/prop-types.js';
+import {placesPropTypes, reviewsPropTypes} from '../../common/prop-types.js';
 import Header from '../header/header';
 import ReviewForm from '../review-form/review-form';
 import ReviewsList from '../reviews-list/reviews-list';
-import {MAX_NUMBER_PIN, MAX_PROPERTY_IMAGES} from '../../common/const';
+import {MAX_PROPERTY_IMAGES} from '../../common/const';
 import PlaceList from '../place-list/place-list';
 import Map from '../map/map';
 import {getNumberOfStars, getPluralaze} from '../../common/utils.js';
@@ -15,27 +15,31 @@ import LoadingScreen from '../loading-screen/loading-screen';
 
 
 const Room = (props) => {
-  const {reviews, nearOffers, onRoomReviewsRender, areReviewsLoaded, onRoomNearOffersRender, areNearOffersLoaded, isPropertyLoaded, place, onPlaceRender} = props;
- 
+  const {
+    offers,
+    reviews,
+    nearOffers,
+    onRoomDataRender,
+    areReviewsLoaded,
+    areNearOffersLoaded,
+    isPropertyLoaded,
+    activePlace,
+    activeCity,
+    place
+  } = props;
+
 
   const {id} = useParams();
- 
 
   useEffect(() => {
-    if (!areReviewsLoaded) {
-      onRoomReviewsRender(id);
-    }
-    if (!areNearOffersLoaded) {
-      onRoomNearOffersRender(id);
-    }
-    if (!isPropertyLoaded) {
-      onPlaceRender(id);
-    }
-  }, [id]);
-
-  if (!areReviewsLoaded && !areNearOffersLoaded && !isPropertyLoaded) {
+    onRoomDataRender(id);
+  }, [place, id]);
+  if (!areReviewsLoaded || !areNearOffersLoaded || !isPropertyLoaded) {
     return <LoadingScreen />;
   }
+
+
+  const currentOffer = offers.find((offer) => offer.id === Number(id)) || place;
 
   const {
     bedrooms,
@@ -50,8 +54,7 @@ const Room = (props) => {
     rating,
     title,
     type
-  } = place;
-  
+  } = currentOffer;
 
   return (
     <div className="page">
@@ -147,13 +150,13 @@ const Room = (props) => {
               </section>
             </div>
           </div>
-          <section className="property__map map"><Map offers={nearOffers.slice(0, MAX_NUMBER_PIN)} /></section>
+          <section className="property__map map"><Map offers={[...nearOffers, currentOffer]} activeCity={activeCity} activePlace={activePlace}/></section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <PlaceList offers={nearOffers.slice(0, MAX_NUMBER_PIN)} placeName="NEAR"/>
+              <PlaceList offers={nearOffers} placeName="NEAR"/>
             </div>
           </section>
         </div>
@@ -164,22 +167,20 @@ const Room = (props) => {
 
 const mapStateToProps = (state) => ({
   offers: state.offers,
+  activeCity: state.activeCity,
+  activePlace: state.activePlace,
+  place: state.place,
+  isPropertyLoaded: state.isPropertyLoaded,
   reviews: state.reviews,
   areReviewsLoaded: state.areReviewsLoaded,
   nearOffers: state.nearOffers,
   areNearOffersLoaded: state.areNearOffersLoaded,
-  place: state.place,
-  isPropertyLoaded: state.isPropertyLoaded
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onRoomReviewsRender(id) {
+  onRoomDataRender(id) {
     dispatch(fetchRoomReviews(id));
-  },
-  onRoomNearOffersRender(id) {
     dispatch(fetchNearOffers(id));
-  },
-  onPlaceRender(id) {
     dispatch(fetchRoom(id));
   },
 });
@@ -188,10 +189,12 @@ Room.propTypes = {
   offers: placesPropTypes,
   reviews: reviewsPropTypes,
   nearOffers: placesPropTypes,
+  place: placesPropTypes,
+  activePlace: PropTypes.number,
+  activeCity: PropTypes.string.isRequired,
   areReviewsLoaded: PropTypes.bool.isRequired,
-  onRoomReviewsRender: PropTypes.func.isRequired,
+  onRoomDataRender: PropTypes.func.isRequired,
   areNearOffersLoaded: PropTypes.bool.isRequired,
-  onRoomNearOffersRender:  PropTypes.func.isRequired,
   isPropertyLoaded: PropTypes.bool.isRequired,
 };
 

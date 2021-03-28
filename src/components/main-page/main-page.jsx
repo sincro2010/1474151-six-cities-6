@@ -13,7 +13,7 @@ import LoadingScreen from '../loading-screen/loading-screen';
 
 const MainPage = (props) => {
 
-  const {offers, activeCity, onMainPageRender, isDataLoaded} = props;
+  const {offers, activeCity, activePlace, onMainPageRender, isDataLoaded} = props;
 
   useEffect(() => {
     if (!isDataLoaded) {
@@ -61,7 +61,7 @@ const MainPage = (props) => {
                 <PlaceList offers={offers} placeName="MAIN"/>
               </section>
               <div className="cities__right-section">
-                <section className="cities__map map"><Map offers={offers} /></section>
+                <section className="cities__map map"><Map offers={offers} activeCity={activeCity} activePlace={activePlace}/></section>
               </div>
             </div>
             : <MainEmptyPage activeCity={activeCity} />};
@@ -75,6 +75,7 @@ const MainPage = (props) => {
 const mapStateToProps = (state) => ({
   offers: getOffersInCity(state.offers, state.activeCity),
   activeCity: state.activeCity,
+  activePlace: state.activePlace,
   isDataLoaded: state.isDataLoaded,
 });
 
@@ -86,6 +87,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 MainPage.propTypes = {
   offers: placesPropTypes,
+  activePlace: PropTypes.number,
   activeCity: PropTypes.string.isRequired,
   onMainPageRender: PropTypes.func.isRequired,
   isDataLoaded: PropTypes.bool.isRequired

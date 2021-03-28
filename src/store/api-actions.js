@@ -1,5 +1,5 @@
 import {ActionCreator} from "./action";
-import {AuthorizationStatus, AppRoute} from "../common/const";
+import {AuthorizationStatus} from "../common/const";
 import {adaptPlaceToClient, adaptReviewToClient} from "./adapter";
 
 
@@ -25,5 +25,18 @@ export const fetchNearOffers = (id) => (next, _getState, api) => (
 
 export const fetchRoom = (id) => (next, _getState, api) => (
   api.get(`/hotels/${id}`)
-    .then(({data}) => next(ActionCreator.getRoom(adaptPlaceToClient(data))))
+    .then(({data}) => next(ActionCreator.getActivePlace(adaptPlaceToClient(data))))
+    .then(({data}) => next(ActionCreator.getplace(adaptPlaceToClient(data))))
+);
+
+export const logIn = ({login: email, password}) => (dispatch, _getState, api) => (
+  api.post(`/login`, {email, password})
+    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+);
+
+export const logOut = () => (dispatch, _getState, api) => (
+  api.get(`/logout`)
+    .then(() => dispatch(ActionCreator.authorizationInfo({})))
+    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)))
+    .catch(() => {})
 );

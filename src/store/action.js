@@ -2,10 +2,11 @@ export const ActionType = {
   CHANGE_CITY: `rent/changeCity`,
   GET_OFFERS: `rent/getOffers`,
   GET_FAVORITE_OFFERS: `rent/getFavoriteOffers`,
-  CHANGE_AUTORIZED_STATUS: `user/isAutorized`,
+  REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
   GET_REVIEWS: `rent/getReviews`,
   GET_NEAR_OFFERS: `rent/getNearOffers`,
-  GET_ROOM: `rent/getRoom`,
+  GET_ACTIVE_PLACE: `rent/getActivePlace`,
+  GET_PLACE: `rent/getPlace`,
 };
 
 export const ActionCreator = {
@@ -29,8 +30,12 @@ export const ActionCreator = {
     type: ActionType.GET_NEAR_OFFERS,
     payload: nearOffers,
   }),
-  getRoom: (place) => ({
-    type: ActionType.GET_ROOM,
+  getActivePlace: (activePlace) => ({
+    type: ActionType.GET_ACTIVE_PLACE,
+    payload: activePlace,
+  }),
+  getPlace: (place) => ({
+    type: ActionType.GET_PLACE,
     payload: place,
   }),
   requireAuthorization: (status) => ({
