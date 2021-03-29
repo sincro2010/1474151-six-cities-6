@@ -7,7 +7,7 @@ import {PlaceSettings} from '../../common/const';
 
 
 const Place = (props) => {
-  const {place, placeName, isActivePlace, mouseOver, mouseOut} = props;
+  const {place, placeName, setActivePlace, unsetActivePlace} = props;
   const {
     id,
     isPremium,
@@ -19,8 +19,11 @@ const Place = (props) => {
     type
   } = place;
 
+  const mouseOver = () => setActivePlace(place.id);
+  const mouseOut = () => unsetActivePlace();
+
   return (
-    <article className={`${PlaceSettings[placeName].article} place-card ${isActivePlace && `place-card--active`}`} onMouseOver={mouseOver} onMouseOut={mouseOut}>
+    <article className={`${PlaceSettings[placeName].article} place-card ${mouseOver && `place-card--active`}`} onMouseOver={mouseOver} onMouseOut={mouseOut}>
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
@@ -28,7 +31,7 @@ const Place = (props) => {
       )}
       <div className={`${PlaceSettings[placeName].image.imageClass} place-card__image-wrapper`}>
         <Link to={`/offer/` + id}>
-          <img className="place-card__image" src={`img/${previewImage}`} width={`${PlaceSettings[placeName].image.width}`} height={`${PlaceSettings[placeName].image.height}`} alt="Place image"/>
+          <img className="place-card__image" src={previewImage} width={`${PlaceSettings[placeName].image.width}`} height={`${PlaceSettings[placeName].image.height}`} alt="Place image"/>
         </Link>
       </div>
       <div className={`${PlaceSettings[placeName].info} place-card__info`}>
@@ -62,9 +65,8 @@ const Place = (props) => {
 Place.propTypes = {
   place: placePropTypes,
   placeName: PropTypes.string.isRequired,
-  isActivePlace: PropTypes.func.isRequired,
-  mouseOver: PropTypes.func.isRequired,
-  mouseOut: PropTypes.func.isRequired
+  setActivePlace: PropTypes.func.isRequired,
+  unsetActivePlace: PropTypes.func.isRequired
 };
 
 export default Place;

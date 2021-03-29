@@ -1,20 +1,23 @@
 import React, {useRef, useEffect} from 'react';
-import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {placesPropTypes} from '../../common/prop-types.js';
 
 const Map = (props) => {
-  const {offers, activeCity} = props;
+  const {offers, activeCity, activePlace} = props;
   const mapRef = useRef();
-  const city = offers.find((place) => place.city.name === activeCity).city.location;
-  const center = {lat: city.latitude, lng: city.longitude};
-  const zoom = city.zoom;
+  const {latitude, longitude, zoom} = offers[0].city.location;
+  const center = {lat: latitude, lng: longitude};
 
 
-  const icon = leaflet.icon({
+  const iconStandard = leaflet.icon({
     iconUrl: `img/pin.svg`,
+    iconSize: [30, 30]
+  });
+
+  const iconActive = leaflet.icon({
+    iconUrl: `img/pin-active.svg`,
     iconSize: [30, 30]
   });
 
@@ -37,6 +40,7 @@ const Map = (props) => {
      .addTo(map);
 
     offers.map((place) => {
+      const icon = place.id === activePlace ? iconActive : iconStandard;
       leaflet
       .marker({
         lat: place.location.latitude,
@@ -48,22 +52,18 @@ const Map = (props) => {
     return () => {
       map.remove();
     };
-  }, [offers]);
+  }, [activeCity, activePlace]);
 
   return (
     <div id="map" ref={mapRef} style={{height: `100%`, width: `100%`}}></div>
   );
 };
 
-const mapStateToProps = (state) => ({
-  activeCity: state.activeCity,
-  offers: state.offers,
-});
-
 Map.propTypes = {
   offers: placesPropTypes,
   activeCity: PropTypes.string.isRequired,
+  activePlace: PropTypes.number,
 };
 
-export {Map};
-export default connect(mapStateToProps, null)(Map);
+export default Map;
+
