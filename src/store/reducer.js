@@ -14,7 +14,8 @@ const initialState = {
   activePlace: null,
   place: [],
   isPropertyLoaded: false,
-  authorizationStatus: AuthorizationStatus.NO_AUTH
+  authorizationStatus: AuthorizationStatus.NO_AUTH,
+  authorizationInfo: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -70,7 +71,12 @@ const reducer = (state = initialState, action) => {
     case ActionType.REQUIRED_AUTHORIZATION:
       return {
         ...state,
-        authorizationStatus: action.payload
+        authorizationStatus: action.payload,
+      };
+    case ActionType.AUTHORIZATION_INFO:
+      return {
+        ...state,
+        authorizationInfo: action.payload
       };
   }
 

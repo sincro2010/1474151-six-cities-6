@@ -8,17 +8,26 @@ import {Provider} from 'react-redux';
 import {reducer} from './store/reducer';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {ActionCreator} from './store/action';
+import {checkAuth} from "./store/api-actions";
 import {AuthorizationStatus} from "./common/const";
+import {redirect} from "./store/middlewares/redirect";
 
 const api = createAPI(
     () => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH))
 );
 
-const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api))));
+const store = createStore(
+    reducer,
+    composeWithDevTools(
+        applyMiddleware(thunk.withExtraArgument(api)),
+        applyMiddleware(redirect)
+    ));
 
-ReactDOM.render(
-    <Provider store={store}>
-      <App/>
-    </Provider>,
-    document.querySelector(`#root`)
-);
+store.dispatch(checkAuth()).then(() => {
+  ReactDOM.render(
+      <Provider store={store}>
+        <App/>
+      </Provider>,
+      document.querySelector(`#root`)
+  );
+});

@@ -2,11 +2,13 @@ export const ActionType = {
   CHANGE_CITY: `rent/changeCity`,
   GET_OFFERS: `rent/getOffers`,
   GET_FAVORITE_OFFERS: `rent/getFavoriteOffers`,
-  REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
   GET_REVIEWS: `rent/getReviews`,
   GET_NEAR_OFFERS: `rent/getNearOffers`,
   GET_ACTIVE_PLACE: `rent/getActivePlace`,
   GET_PLACE: `rent/getPlace`,
+  REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
+  REDIRECT_TO_ROUTE: `redirectToRoute`,
+  AUTHORIZATION_INFO: `authorizationInfo`,
 };
 
 export const ActionCreator = {
@@ -41,7 +43,15 @@ export const ActionCreator = {
   requireAuthorization: (status) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,
     payload: status,
-  })
+  }),
+  redirectToRoute: (url) => ({
+    type: ActionType.REDIRECT_TO_ROUTE,
+    payload: url,
+  }),
+  authorizationInfo: (info) => ({
+    type: ActionType.AUTHORIZATION_INFO,
+    payload: info
+  }),
 };
 
 

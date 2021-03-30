@@ -1,16 +1,18 @@
 import React from 'react';
 import {placesPropTypes, reviewsPropTypes} from '../../common/prop-types.js';
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import Room from '../room/room';
 import SignIn from '../sign-in/sign-in';
 import Favorites from '../favorites/favorites';
 import MainPage from '../main-page/main-page';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
+import PrivateRoute from '../private-route/private-route';
+import browserHistory from "../../browser-history";
 
 const App = () => {
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path="/">
           <MainPage />
@@ -21,9 +23,11 @@ const App = () => {
         <Route exact path="/offer/:id?">
           <Room />
         </Route>
-        <Route exact path="/favorites">
-          <Favorites />
-        </Route>
+        <PrivateRoute exact
+          path="/favorites"
+          render={() => <Favorites />}
+        >
+        </PrivateRoute>
         <Route>
           <NotFoundScreen />
         </Route>
