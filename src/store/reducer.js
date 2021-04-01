@@ -11,8 +11,8 @@ const initialState = {
   areReviewsLoaded: false,
   nearOffers: [],
   areNearOffersLoaded: false,
-  activePlace: null,
-  place: [],
+  activePlaceId: null,
+  place: {},
   isPropertyLoaded: false,
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   authorizationInfo: {},
@@ -57,8 +57,7 @@ const reducer = (state = initialState, action) => {
     case ActionType.GET_ACTIVE_PLACE:
       return {
         ...state,
-        activePlace: action.payload,
-        isPropertyLoaded: true
+        activePlaceId: action.payload,
       };
 
     case ActionType.GET_PLACE:
@@ -78,6 +77,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         authorizationInfo: action.payload
       };
+    case ActionType.SET_ERROR_MESSAGE:
+      return {
+        ...state,
+        message: action.payload
+      };
+
   }
 
   return state;

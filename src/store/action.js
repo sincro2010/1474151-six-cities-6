@@ -6,9 +6,10 @@ export const ActionType = {
   GET_NEAR_OFFERS: `rent/getNearOffers`,
   GET_ACTIVE_PLACE: `rent/getActivePlace`,
   GET_PLACE: `rent/getPlace`,
+  SET_ERROR_MESSAGE: `data/setErrorMessage`,
   REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
-  REDIRECT_TO_ROUTE: `redirectToRoute`,
-  AUTHORIZATION_INFO: `authorizationInfo`,
+  REDIRECT_TO_ROUTE: `data/redirectToRoute`,
+  AUTHORIZATION_INFO: `user/authorizationInfo`,
 };
 
 export const ActionCreator = {
@@ -32,9 +33,9 @@ export const ActionCreator = {
     type: ActionType.GET_NEAR_OFFERS,
     payload: nearOffers,
   }),
-  getActivePlace: (activePlace) => ({
+  getActivePlace: (activePlaceId) => ({
     type: ActionType.GET_ACTIVE_PLACE,
-    payload: activePlace,
+    payload: activePlaceId,
   }),
   getPlace: (place) => ({
     type: ActionType.GET_PLACE,
@@ -51,6 +52,10 @@ export const ActionCreator = {
   authorizationInfo: (info) => ({
     type: ActionType.AUTHORIZATION_INFO,
     payload: info
+  }),
+  setErrorMessage: (message) => ({
+    type: ActionType.SET_ERROR_MESSAGE,
+    payload: message
   }),
 };
 
