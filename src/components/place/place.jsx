@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {placePropTypes} from '../../common/prop-types.js';
-import {getNumberOfStars} from '../../common/utils.js';
+import {getNumberOfStars, getProperty} from '../../common/utils.js';
 import {PlaceSettings} from '../../common/const';
 
 
@@ -30,7 +30,7 @@ const Place = (props) => {
         </div>
       )}
       <div className={`${PlaceSettings[placeName].image.imageClass} place-card__image-wrapper`}>
-        <Link to={`/offer/` + id}>
+        <Link to={getProperty(id)}>
           <img className="place-card__image" src={previewImage} width={`${PlaceSettings[placeName].image.width}`} height={`${PlaceSettings[placeName].image.height}`} alt="Place image"/>
         </Link>
       </div>
@@ -54,7 +54,7 @@ const Place = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/` + id}>{title}</Link>
+          <Link to={getProperty(id)}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

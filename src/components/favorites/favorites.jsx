@@ -8,6 +8,7 @@ import FavoritesEmpty from "../favorites-empty/favorites-empty";
 import {fetchFavoritePlaceList} from "../../store/api-actions";
 import LoadingScreen from '../loading-screen/loading-screen';
 import {Link} from 'react-router-dom';
+import {AppRoute} from '../../common/const';
 
 const Favorites = (props) => {
   const {favoriteOffers, isFavoriteDataLoaded, onFavoritePageRender} = props;
@@ -53,7 +54,7 @@ const Favorites = (props) => {
         : <FavoritesEmpty />
       }
       <footer className="footer container">
-        <Link className="footer__logo-link" to="/">
+        <Link className="footer__logo-link" to={AppRoute.MAIN}>
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
         </Link>
       </footer>

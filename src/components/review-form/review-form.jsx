@@ -1,15 +1,30 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {useState} from 'react';
+import {connect} from "react-redux";
+import {sendRoomReview} from '../../store/api-actions';
 import {placesPropTypes, reviewsPropTypes} from '../../common/prop-types.js';
 
-const ReviewForm = () => {
+const ReviewForm = (props) => {
+  const {id, onSubmitReview} = props;
   const [commentForm, setCommentForm] = useState({
-    rating: 0,
-    review: ``
+    rating: null,
+    comment: ``
   });
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+
+    onSubmitReview(
+        id,
+        commentForm
+    );
+
+    setCommentForm({
+      ...commentForm,
+      rating: null,
+      comment: ``
+    });
   };
 
   const handleFieldChange = (evt) => {
@@ -56,7 +71,7 @@ const ReviewForm = () => {
           </svg>
         </label>
       </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={handleFieldChange}></textarea>
+      <textarea className="reviews__textarea form__textarea" id="comment" name="comment" placeholder="Tell how was your stay, what you like and what can be improved" value={commentForm.comment} onChange={handleFieldChange}></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
@@ -69,7 +84,16 @@ const ReviewForm = () => {
 
 ReviewForm.propTypes = {
   reviews: reviewsPropTypes,
-  places: placesPropTypes
+  places: placesPropTypes,
+  onSubmitReview: PropTypes.func.isRequired,
+  id: PropTypes.number,
 };
 
-export default ReviewForm;
+const mapDispatchToProps = (dispatch) => ({
+  onSubmitReview(id, reviewData) {
+    dispatch(sendRoomReview(id, reviewData));
+  }
+});
+
+export {ReviewForm};
+export default connect(null, mapDispatchToProps)(ReviewForm);

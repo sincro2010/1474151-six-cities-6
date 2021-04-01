@@ -54,4 +54,8 @@ export const AppRoute = {
   NEARBY: `nearby`
 };
 
+export const HttpCode = {
+  NOT_FOUND: 404
+};
+
 

@@ -1,11 +1,12 @@
 import React, {useRef, useEffect} from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {placesPropTypes} from '../../common/prop-types.js';
 
 const Map = (props) => {
-  const {offers, activeCity, activePlace} = props;
+  const {offers, activeCity, activePlaceId} = props;
   const mapRef = useRef();
   const {latitude, longitude, zoom} = offers[0].city.location;
   const center = {lat: latitude, lng: longitude};
@@ -40,7 +41,7 @@ const Map = (props) => {
      .addTo(map);
 
     offers.map((place) => {
-      const icon = place.id === activePlace ? iconActive : iconStandard;
+      const icon = place.id === activePlaceId ? iconActive : iconStandard;
       leaflet
       .marker({
         lat: place.location.latitude,
@@ -52,18 +53,24 @@ const Map = (props) => {
     return () => {
       map.remove();
     };
-  }, [activeCity, activePlace]);
+  }, [activeCity, activePlaceId]);
 
   return (
     <div id="map" ref={mapRef} style={{height: `100%`, width: `100%`}}></div>
   );
 };
 
+const mapStateToProps = (state) => ({
+  activePlaceId: state.activePlaceId,
+});
+
 Map.propTypes = {
   offers: placesPropTypes,
   activeCity: PropTypes.string.isRequired,
-  activePlace: PropTypes.number,
+  activePlaceId: PropTypes.number,
 };
 
-export default Map;
+export {Map};
+
+export default connect(mapStateToProps, null)(Map);
 

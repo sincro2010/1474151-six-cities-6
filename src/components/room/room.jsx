@@ -1,12 +1,11 @@
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
-import {useParams} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {placesPropTypes, reviewsPropTypes} from '../../common/prop-types.js';
+import {placesPropTypes, reviewsPropTypes, placePropTypes} from '../../common/prop-types.js';
 import Header from '../header/header';
 import ReviewForm from '../review-form/review-form';
 import ReviewsList from '../reviews-list/reviews-list';
-import {MAX_PROPERTY_IMAGES} from '../../common/const';
+import {MAX_PROPERTY_IMAGES, AuthorizationStatus} from '../../common/const';
 import PlaceList from '../place-list/place-list';
 import Map from '../map/map';
 import {getNumberOfStars, getPluralaze} from '../../common/utils.js';
@@ -16,30 +15,24 @@ import LoadingScreen from '../loading-screen/loading-screen';
 
 const Room = (props) => {
   const {
-    offers,
     reviews,
     nearOffers,
     onRoomDataRender,
     areReviewsLoaded,
     areNearOffersLoaded,
     isPropertyLoaded,
-    activePlace,
+    place,
     activeCity,
-    place
+    placeId,
+    authorizationStatus
   } = props;
 
-
-  const {id} = useParams();
-
   useEffect(() => {
-    onRoomDataRender(id);
-  }, [place, id]);
+    onRoomDataRender(placeId);
+  }, [placeId]);
   if (!areReviewsLoaded || !areNearOffersLoaded || !isPropertyLoaded) {
     return <LoadingScreen />;
   }
-
-
-  const currentOffer = offers.find((offer) => offer.id === Number(id)) || place;
 
   const {
     bedrooms,
@@ -54,7 +47,7 @@ const Room = (props) => {
     rating,
     title,
     type
-  } = currentOffer;
+  } = place;
 
   return (
     <div className="page">
@@ -101,7 +94,7 @@ const Room = (props) => {
                   {type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                  {bedrooms} Bedroom{getPluralaze(bedrooms)}
+                  {bedrooms} Bedroom{getPluralaze(Number(bedrooms))}
                 </li>
                 <li className="property__feature property__feature--adults">
                   Max {maxAdults} adult{getPluralaze(maxAdults)}
@@ -135,9 +128,6 @@ const Room = (props) => {
                   <p className="property__text">
                     {description}
                   </p>
-                  <p className="property__text">
-                    An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
-                  </p>
                 </div>
               </div>
               <section className="property__reviews reviews">
@@ -146,11 +136,14 @@ const Room = (props) => {
                   (reviews.length > 0) &&
                   <ReviewsList reviews={reviews} />
                 }
-                <ReviewForm />
+                {
+                  authorizationStatus === AuthorizationStatus.AUTH &&
+                  <ReviewForm id={placeId} />
+                }
               </section>
             </div>
           </div>
-          <section className="property__map map"><Map offers={[...nearOffers, currentOffer]} activeCity={activeCity} activePlace={activePlace}/></section>
+          <section className="property__map map"><Map offers={[...nearOffers, place]} activeCity={activeCity} /></section>
         </section>
         <div className="container">
           <section className="near-places places">
@@ -166,15 +159,15 @@ const Room = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
   activeCity: state.activeCity,
-  activePlace: state.activePlace,
+  activePlaceId: state.activePlace,
   place: state.place,
   isPropertyLoaded: state.isPropertyLoaded,
   reviews: state.reviews,
   areReviewsLoaded: state.areReviewsLoaded,
   nearOffers: state.nearOffers,
   areNearOffersLoaded: state.areNearOffersLoaded,
+  authorizationStatus: state.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -186,16 +179,16 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Room.propTypes = {
-  offers: placesPropTypes,
   reviews: reviewsPropTypes,
   nearOffers: placesPropTypes,
-  place: placesPropTypes,
-  activePlace: PropTypes.number,
+  place: placePropTypes,
+  placeId: PropTypes.number,
   activeCity: PropTypes.string.isRequired,
   areReviewsLoaded: PropTypes.bool.isRequired,
   onRoomDataRender: PropTypes.func.isRequired,
   areNearOffersLoaded: PropTypes.bool.isRequired,
   isPropertyLoaded: PropTypes.bool.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 export {Room};
