@@ -158,16 +158,16 @@ const Room = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  activeCity: state.activeCity,
-  activePlaceId: state.activePlace,
-  place: state.place,
-  isPropertyLoaded: state.isPropertyLoaded,
-  reviews: state.reviews,
-  areReviewsLoaded: state.areReviewsLoaded,
-  nearOffers: state.nearOffers,
-  areNearOffersLoaded: state.areNearOffersLoaded,
-  authorizationStatus: state.authorizationStatus,
+const mapStateToProps = ({PLACES, DATA, USER}) => ({
+  activeCity: PLACES.activeCity,
+  activePlaceId: PLACES.activePlace,
+  place: DATA.place,
+  isPropertyLoaded: DATA.isPropertyLoaded,
+  reviews: DATA.reviews,
+  areReviewsLoaded: DATA.areReviewsLoaded,
+  nearOffers: DATA.nearOffers,
+  areNearOffersLoaded: DATA.areNearOffersLoaded,
+  authorizationStatus: USER.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({

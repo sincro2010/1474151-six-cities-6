@@ -60,8 +60,8 @@ const Map = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  activePlaceId: state.activePlaceId,
+const mapStateToProps = ({PLACES}) => ({
+  activePlaceId: PLACES.activePlaceId,
 });
 
 Map.propTypes = {
