@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {placePropTypes} from '../../common/prop-types.js';
 import {getNumberOfStars, getProperty} from '../../common/utils.js';
 import {PlaceSettings} from '../../common/const';
-
+import ButtonIsFavorite from "../button-is-favorite/button-is-favorite";
 
 const Place = (props) => {
   const {place, placeName, setActivePlace, unsetActivePlace} = props;
@@ -40,12 +40,7 @@ const Place = (props) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button ${isFavorite && `place-card__bookmark-button--active`} button`} type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">In bookmarks</span>
-          </button>
+          <ButtonIsFavorite nameButton={`PLACE`} isFavorite={isFavorite} id={String(id)} />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

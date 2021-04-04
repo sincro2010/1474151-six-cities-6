@@ -1,5 +1,5 @@
 import {ActionType} from '../action';
-import {getOffers, getFavoriteOffers, getReviews, getNearOffers, getPlace, redirectToRoute, setErrorMessage} from '../action';
+import {changeFavoriteOffers, updateOffers, updateNearOffers} from '../../common/utils';
 
 const initialState = {
   offers: [],
@@ -56,6 +56,19 @@ const data = (state = initialState, action) => {
       return {
         ...state,
         message: action.payload
+      };
+
+    case ActionType.UPDATE_FAVORITE_PLACE:
+      return {
+        ...state,
+        favoriteOffers: changeFavoriteOffers(state.favoriteOffers, action.payload),
+        offers: updateOffers(state.offers, action.payload),
+        nearOffers: updateNearOffers(state.nearOffers, action.payload)
+      };
+    case ActionType.CHANGE_IS_FAVORITE_PLACE:
+      return {
+        ...state,
+        place: Object.assign({}, state.place, {isFavorite: !state.place.isFavorite})
       };
 
   }

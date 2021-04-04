@@ -10,6 +10,8 @@ export const ActionType = {
   REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
   REDIRECT_TO_ROUTE: `data/redirectToRoute`,
   AUTHORIZATION_INFO: `user/authorizationInfo`,
+  CHANGE_IS_FAVORITE_PLACE: `data/changeIsFavoritePLACE`,
+  UPDATE_FAVORITE_PLACE: `data/updateFavoritePlace`,
 };
 
 export const ActionCreator = {
@@ -57,6 +59,14 @@ export const ActionCreator = {
     type: ActionType.SET_ERROR_MESSAGE,
     payload: message
   }),
+  changeIsFavoritePlace: () => ({
+    type: ActionType.CHANGE_IS_FAVORITE_PLACE,
+  }),
+  updateFavoritePlace: (place) => ({
+    type: ActionType.UPDATE_FAVORITE_PLACE,
+    payload: place
+  }),
+
 };
 
 

@@ -1,6 +1,5 @@
 import {ActionType} from '../action';
 import {CITIES} from "../../common/const";
-import {changeCity, getActivePlace} from '../action';
 
 const initialState = {
   activeCity: CITIES[0],
