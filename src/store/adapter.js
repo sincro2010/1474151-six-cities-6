@@ -14,7 +14,6 @@ export const adaptPlaceToClient = (place) => {
         previewImage: place.preview_image
       }
   );
-
   delete adaptedPlace.host.avatar_url;
   delete adaptedPlace.host.is_pro;
   delete adaptedPlace.is_favorite;

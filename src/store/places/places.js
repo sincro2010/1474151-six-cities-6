@@ -1,9 +1,10 @@
 import {ActionType} from '../action';
-import {CITIES} from "../../common/const";
+import {CITIES, SortingTypes} from "../../common/const";
 
 const initialState = {
   activeCity: CITIES[0],
   activePlaceId: null,
+  activeSorting: SortingTypes.POPULAR,
 };
 
 const places = (state = initialState, action) => {
@@ -12,6 +13,11 @@ const places = (state = initialState, action) => {
       return {
         ...state,
         activeCity: action.payload
+      };
+    case ActionType.CHANGE_SORTING:
+      return {
+        ...state,
+        activeSorting: action.payload
       };
     case ActionType.GET_ACTIVE_PLACE:
       return {
