@@ -45,9 +45,9 @@ const Header = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
-  authorizationInfo: state.authorizationInfo,
+const mapStateToProps = ({USER}) => ({
+  authorizationStatus: USER.authorizationStatus,
+  authorizationInfo: USER.authorizationInfo,
 });
 
 const mapDispatchToProps = (dispatch) => ({

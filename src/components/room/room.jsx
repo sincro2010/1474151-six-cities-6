@@ -11,6 +11,7 @@ import Map from '../map/map';
 import {getNumberOfStars, getPluralaze} from '../../common/utils.js';
 import {fetchRoomReviews, fetchNearOffers, fetchRoom} from "../../store/api-actions";
 import LoadingScreen from '../loading-screen/loading-screen';
+import ButtonIsFavorite from "../button-is-favorite/button-is-favorite";
 
 
 const Room = (props) => {
@@ -75,12 +76,7 @@ const Room = (props) => {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className={`property__bookmark-button ${isFavorite && `property__bookmark-button--active`} button`} type="button">
-                  <svg className="property__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <ButtonIsFavorite nameButton={`ROOM`} isFavorite={isFavorite} id={placeId}/>
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
@@ -158,16 +154,16 @@ const Room = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  activeCity: state.activeCity,
-  activePlaceId: state.activePlace,
-  place: state.place,
-  isPropertyLoaded: state.isPropertyLoaded,
-  reviews: state.reviews,
-  areReviewsLoaded: state.areReviewsLoaded,
-  nearOffers: state.nearOffers,
-  areNearOffersLoaded: state.areNearOffersLoaded,
-  authorizationStatus: state.authorizationStatus,
+const mapStateToProps = ({PLACES, DATA, USER}) => ({
+  activeCity: PLACES.activeCity,
+  activePlaceId: PLACES.activePlace,
+  place: DATA.place,
+  isPropertyLoaded: DATA.isPropertyLoaded,
+  reviews: DATA.reviews,
+  areReviewsLoaded: DATA.areReviewsLoaded,
+  nearOffers: DATA.nearOffers,
+  areNearOffersLoaded: DATA.areNearOffersLoaded,
+  authorizationStatus: USER.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({

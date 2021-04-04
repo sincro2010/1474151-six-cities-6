@@ -62,9 +62,9 @@ const Favorites = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  favoriteOffers: state.favoriteOffers,
-  isFavoriteDataLoaded: state.isFavoriteDataLoaded,
+const mapStateToProps = ({DATA}) => ({
+  favoriteOffers: DATA.favoriteOffers,
+  isFavoriteDataLoaded: DATA.isFavoriteDataLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({

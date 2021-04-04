@@ -72,10 +72,10 @@ const MainPage = (props) => {
 };
 
 
-const mapStateToProps = (state) => ({
-  offers: getOffersInCity(state.offers, state.activeCity),
-  activeCity: state.activeCity,
-  isDataLoaded: state.isDataLoaded,
+const mapStateToProps = ({DATA, PLACES}) => ({
+  offers: getOffersInCity(DATA.offers, PLACES.activeCity),
+  activeCity: PLACES.activeCity,
+  isDataLoaded: DATA.isDataLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({

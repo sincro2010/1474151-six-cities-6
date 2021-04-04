@@ -71,3 +71,9 @@ export const logOut = () => (next, _getState, api) => (
     .then(() => next(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)))
     .catch(() => {})
 );
+
+export const changeFavorite = ({id, status}) => (next, _getState, api) => (
+  api.post(`${AppRoute.FAVORITE}/${id}/${status}`)
+    .then(({place}) => (adaptPlaceToClient(place)))
+    .then((place) => next(ActionCreator.updateFavoritePlace(place)))
+);

@@ -1,15 +1,17 @@
 export const ActionType = {
-  CHANGE_CITY: `rent/changeCity`,
-  GET_OFFERS: `rent/getOffers`,
-  GET_FAVORITE_OFFERS: `rent/getFavoriteOffers`,
-  GET_REVIEWS: `rent/getReviews`,
-  GET_NEAR_OFFERS: `rent/getNearOffers`,
-  GET_ACTIVE_PLACE: `rent/getActivePlace`,
-  GET_PLACE: `rent/getPlace`,
+  CHANGE_CITY: `places/changeCity`,
+  GET_OFFERS: `data/getOffers`,
+  GET_FAVORITE_OFFERS: `data/getFavoriteOffers`,
+  GET_REVIEWS: `data/getReviews`,
+  GET_NEAR_OFFERS: `data/getNearOffers`,
+  GET_ACTIVE_PLACE: `places/getActivePlace`,
+  GET_PLACE: `data/getPlace`,
   SET_ERROR_MESSAGE: `data/setErrorMessage`,
   REQUIRED_AUTHORIZATION: `user/requiredAuthorization`,
   REDIRECT_TO_ROUTE: `data/redirectToRoute`,
   AUTHORIZATION_INFO: `user/authorizationInfo`,
+  CHANGE_IS_FAVORITE_PLACE: `data/changeIsFavoritePLACE`,
+  UPDATE_FAVORITE_PLACE: `data/updateFavoritePlace`,
 };
 
 export const ActionCreator = {
@@ -57,6 +59,14 @@ export const ActionCreator = {
     type: ActionType.SET_ERROR_MESSAGE,
     payload: message
   }),
+  changeIsFavoritePlace: () => ({
+    type: ActionType.CHANGE_IS_FAVORITE_PLACE,
+  }),
+  updateFavoritePlace: (place) => ({
+    type: ActionType.UPDATE_FAVORITE_PLACE,
+    payload: place
+  }),
+
 };
 
 

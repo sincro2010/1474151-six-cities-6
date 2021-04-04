@@ -24,8 +24,8 @@ const NotFoundScreen = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  message: state.message,
+const mapStateToProps = ({DATA}) => ({
+  message: DATA.message,
 });
 
 export {NotFoundScreen};

@@ -1,8 +1,7 @@
-import {ActionType} from './action';
-import {CITIES, AuthorizationStatus} from '../common/const';
+import {ActionType} from '../action';
+import {changeFavoriteOffers, updateOffers, updateNearOffers} from '../../common/utils';
 
 const initialState = {
-  activeCity: CITIES[0],
   offers: [],
   isDataLoaded: false,
   favoriteOffers: [],
@@ -11,20 +10,12 @@ const initialState = {
   areReviewsLoaded: false,
   nearOffers: [],
   areNearOffersLoaded: false,
-  activePlaceId: null,
   place: {},
   isPropertyLoaded: false,
-  authorizationStatus: AuthorizationStatus.NO_AUTH,
-  authorizationInfo: {},
 };
 
-const reducer = (state = initialState, action) => {
+const data = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.CHANGE_CITY:
-      return {
-        ...state,
-        activeCity: action.payload
-      };
 
     case ActionType.GET_OFFERS:
       return {
@@ -54,12 +45,6 @@ const reducer = (state = initialState, action) => {
         areNearOffersLoaded: true
       };
 
-    case ActionType.GET_ACTIVE_PLACE:
-      return {
-        ...state,
-        activePlaceId: action.payload,
-      };
-
     case ActionType.GET_PLACE:
       return {
         ...state,
@@ -67,20 +52,23 @@ const reducer = (state = initialState, action) => {
         isPropertyLoaded: true
       };
 
-    case ActionType.REQUIRED_AUTHORIZATION:
-      return {
-        ...state,
-        authorizationStatus: action.payload,
-      };
-    case ActionType.AUTHORIZATION_INFO:
-      return {
-        ...state,
-        authorizationInfo: action.payload
-      };
     case ActionType.SET_ERROR_MESSAGE:
       return {
         ...state,
         message: action.payload
+      };
+
+    case ActionType.UPDATE_FAVORITE_PLACE:
+      return {
+        ...state,
+        favoriteOffers: changeFavoriteOffers(state.favoriteOffers, action.payload),
+        offers: updateOffers(state.offers, action.payload),
+        nearOffers: updateNearOffers(state.nearOffers, action.payload)
+      };
+    case ActionType.CHANGE_IS_FAVORITE_PLACE:
+      return {
+        ...state,
+        place: Object.assign({}, state.place, {isFavorite: !state.place.isFavorite})
       };
 
   }
@@ -88,4 +76,4 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {reducer};
+export {data};
