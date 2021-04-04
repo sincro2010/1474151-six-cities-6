@@ -1,5 +1,6 @@
 export const ActionType = {
   CHANGE_CITY: `places/changeCity`,
+  CHANGE_SORTING: `places/changeSorting`,
   GET_OFFERS: `data/getOffers`,
   GET_FAVORITE_OFFERS: `data/getFavoriteOffers`,
   GET_REVIEWS: `data/getReviews`,
@@ -18,6 +19,10 @@ export const ActionCreator = {
   changeCity: (selectedCity) => ({
     type: ActionType.CHANGE_CITY,
     payload: selectedCity,
+  }),
+  changeSorting: (activeSorting) => ({
+    type: ActionType.CHANGE_SORTING,
+    payload: activeSorting,
   }),
   getOffers: (offers) => ({
     type: ActionType.GET_OFFERS,
@@ -66,7 +71,6 @@ export const ActionCreator = {
     type: ActionType.UPDATE_FAVORITE_PLACE,
     payload: place
   }),
-
 };
 
 
