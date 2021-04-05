@@ -36,7 +36,6 @@ export const fetchNearOffers = (id) => (next, _getState, api) => (
 export const fetchRoom = (id) => (next, _getState, api) => (
   api.get(`${AppRoute.HOTELS}/${id}`)
     .then(({data}) => next(ActionCreator.getPlace(adaptPlaceToClient(data))))
-    .then(({data}) => next(ActionCreator.getActivePlace(adaptPlaceToClient(data))))
     .catch((err) => {
       const {response} = err;
       switch (response.status) {

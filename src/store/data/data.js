@@ -52,12 +52,6 @@ const data = (state = initialState, action) => {
         isPropertyLoaded: true
       };
 
-    case ActionType.SET_ERROR_MESSAGE:
-      return {
-        ...state,
-        message: action.payload
-      };
-
     case ActionType.UPDATE_FAVORITE_PLACE:
       return {
         ...state,
