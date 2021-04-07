@@ -35,7 +35,7 @@ export const fetchNearOffers = (id) => (next, _getState, api) => (
 
 export const fetchRoom = (id) => (next, _getState, api) => (
   api.get(`${AppRoute.HOTELS}/${id}`)
-    .then(({data}) => next(ActionCreator.getPlace(adaptPlaceToClient(data))))
+    .then((place) => next(ActionCreator.getPlace(adaptPlaceToClient(place.data))))
     .catch((err) => {
       const {response} = err;
       switch (response.status) {
@@ -73,6 +73,6 @@ export const logOut = () => (next, _getState, api) => (
 
 export const changeFavorite = ({id, status}) => (next, _getState, api) => (
   api.post(`${AppRoute.FAVORITE}/${id}/${status}`)
-    .then(({place}) => (adaptPlaceToClient(place)))
-    .then((place) => next(ActionCreator.updateFavoritePlace(place)))
+    .then(({data}) => (adaptPlaceToClient(data)))
+    .then((data) => next(ActionCreator.updateFavoritePlace(data)))
 );

@@ -12,7 +12,7 @@ export const adaptPlaceToClient = (place) => {
         isPremium: place.is_premium,
         maxAdults: place.max_adults,
         previewImage: place.preview_image
-      }
+      },
   );
 
   delete adaptedPlace.host.avatar_url;
