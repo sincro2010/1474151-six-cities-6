@@ -1,5 +1,5 @@
 import {ActionCreator} from "./action";
-import {AuthorizationStatus, AppRoute, HttpCode} from "../common/const";
+import {AuthorizationStatus, AppRoute, HttpCode, Status} from "../common/const";
 import {adaptPlaceToClient, adaptReviewToClient} from "./adapter";
 
 
@@ -24,7 +24,8 @@ export const fetchRoomReviews = (id) => (next, _getState, api) => (
 export const sendRoomReview = (id, {rating, comment}) => (next, _getState, api) => {
   api.post(`${AppRoute.COMMENTS}/${id}`, {rating, comment})
     .then(({data}) => next(ActionCreator.getReviews(data.map((review) => adaptReviewToClient(review)))))
-    .catch(() => {});
+    .then(() => next(ActionCreator.statusReviewSending(Status.SUCCESS)))
+    .catch(() => next(ActionCreator.statusReviewSending(Status.ERROR)));
 };
 
 export const fetchNearOffers = (id) => (next, _getState, api) => (

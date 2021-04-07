@@ -13,6 +13,7 @@ export const ActionType = {
   AUTHORIZATION_INFO: `user/authorizationInfo`,
   CHANGE_IS_FAVORITE_PLACE: `data/changeIsFavoritePLACE`,
   UPDATE_FAVORITE_PLACE: `data/updateFavoritePlace`,
+  STATUS_REVIEW_SENDING: `data/`,
 };
 
 export const ActionCreator = {
@@ -70,6 +71,10 @@ export const ActionCreator = {
   updateFavoritePlace: (place) => ({
     type: ActionType.UPDATE_FAVORITE_PLACE,
     payload: place
+  }),
+  statusReviewSending: (data) => ({
+    type: ActionType.STATUS_REVIEW_SENDING,
+    payload: data
   }),
 };
 

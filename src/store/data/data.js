@@ -1,5 +1,6 @@
 import {ActionType} from '../action';
 import {changeFavoriteOffers, updateOffers, updateNearOffers} from '../../common/utils';
+import {Status} from '../../common/const';
 
 const initialState = {
   offers: [],
@@ -12,6 +13,7 @@ const initialState = {
   areNearOffersLoaded: false,
   place: {},
   isPropertyLoaded: false,
+  statusReviewSending: Status.PENDING
 };
 
 const data = (state = initialState, action) => {
@@ -36,6 +38,12 @@ const data = (state = initialState, action) => {
         ...state,
         reviews: action.payload,
         areReviewsLoaded: true
+      };
+
+    case ActionType.STATUS_REVIEW_SENDING:
+      return {
+        ...state,
+        statusReviewSending: action.payload
       };
 
     case ActionType.GET_NEAR_OFFERS:

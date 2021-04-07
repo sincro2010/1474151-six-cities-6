@@ -4,9 +4,10 @@ import {useState} from 'react';
 import {connect} from "react-redux";
 import {sendRoomReview} from '../../store/api-actions';
 import {placesPropTypes, reviewsPropTypes} from '../../common/prop-types.js';
+import {REVIEW_MIN_SYMBOLS, REVIEW_MAX_SYMBOLS, Status} from '../../common/const';
 
 const ReviewForm = (props) => {
-  const {id, onSubmitReview} = props;
+  const {id, onSubmitReview, statusReviewSending} = props;
   const [commentForm, setCommentForm] = useState({
     rating: null,
     comment: ``
@@ -76,7 +77,10 @@ const ReviewForm = (props) => {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={
+          (commentForm.comment.length < REVIEW_MIN_SYMBOLS || commentForm.comment.length > REVIEW_MAX_SYMBOLS || !commentForm.rating)
+        }>Submit</button>
+        {statusReviewSending === Status.ERROR && <div style={{color: `red`}}><span>Review sending error!</span></div>}
       </div>
     </form>
   );
@@ -87,7 +91,12 @@ ReviewForm.propTypes = {
   places: placesPropTypes,
   onSubmitReview: PropTypes.func.isRequired,
   id: PropTypes.number,
+  statusReviewSending: PropTypes.string.isRequired,
 };
+
+const mapStateToProps = ({DATA}) => ({
+  statusReviewSending: DATA.statusReviewSending,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmitReview(id, reviewData) {
@@ -96,4 +105,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {ReviewForm};
-export default connect(null, mapDispatchToProps)(ReviewForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewForm);

@@ -3,6 +3,8 @@ export const AVATAR_URL = `https://i.pravatar.cc/128`;
 export const MAX_NUMBER_STARS = 5;
 export const MAX_NUMBER_PIN = 3;
 export const MAX_PROPERTY_IMAGES = 6;
+export const REVIEW_MIN_SYMBOLS = 10;
+export const REVIEW_MAX_SYMBOLS = 300;
 
 export const PlaceSettings = {
   MAIN: {
@@ -80,6 +82,12 @@ export const ButtonTypes = {
 
 export const HttpCode = {
   NOT_FOUND: 404
+};
+
+export const Status = {
+  PENDING: `pending`,
+  SUCCESS: `success`,
+  ERROR: `status/error`
 };
 
 

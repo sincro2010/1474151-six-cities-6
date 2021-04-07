@@ -3,9 +3,12 @@ import Header from "../header/header";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {logIn} from '../../store/api-actions';
+import {ActionCreator} from "../../store/action";
+import {AuthorizationStatus, AppRoute} from '../../common/const';
+import {Redirect} from 'react-router-dom';
 
 const SignIn = (props) => {
-  const {onSubmit} = props;
+  const {onSubmit, authorizationStatus, redirectToMain} = props;
   const loginRef = useRef();
   const passwordRef = useRef();
 
@@ -17,6 +20,10 @@ const SignIn = (props) => {
       password: passwordRef.current.value,
     });
   };
+
+  if (authorizationStatus === AuthorizationStatus.AUTH) {
+    return <Redirect to={AppRoute.MAIN} />
+  }
 
   return (
     <div className="page page--gray page--login">
@@ -52,13 +59,21 @@ const SignIn = (props) => {
 
 SignIn.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired
 };
+
+const mapStateToProps = ({USER}) => ({
+  authorizationStatus: USER.authorizationStatus,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit(authData) {
     dispatch(logIn(authData));
-  }
+  },
+  redirectToMain(data) {
+    dispatch(ActionCreator.redirectToRoute(data));
+  },
 });
 
 export {SignIn};
-export default connect(null, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
