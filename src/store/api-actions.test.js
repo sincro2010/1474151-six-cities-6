@@ -3,15 +3,15 @@ import {createAPI} from '../services/api';
 import {ActionType} from './action';
 import {AuthorizationStatus, AppRoute} from "../common/const";
 import {
- fetchPlaceList,
- fetchFavoritePlaceList,
- checkAuth,
- logIn,
- logOut,
- fetchRoom,
- fetchRoomReviews,
- sendRoomReview,
- changeFavorite
+  fetchPlaceList,
+  fetchFavoritePlaceList,
+  checkAuth,
+  logIn,
+  logOut,
+  fetchRoom,
+  fetchRoomReviews,
+  sendRoomReview,
+  changeFavorite
 } from './api-actions';
 
 const api = createAPI(() => {});
@@ -199,7 +199,7 @@ describe(`Async operation work correctly`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const id = 1;
-    const propertyLoader = fetchProperty(id);
+    const propertyLoader = fetchRoom(id);
 
     apiMock
       .onGet(`${AppRoute.HOTELS}/${id}`)

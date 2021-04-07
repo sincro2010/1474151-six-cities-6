@@ -3,12 +3,11 @@ import Header from "../header/header";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {logIn} from '../../store/api-actions';
-import {ActionCreator} from "../../store/action";
 import {AuthorizationStatus, AppRoute} from '../../common/const';
 import {Redirect} from 'react-router-dom';
 
 const SignIn = (props) => {
-  const {onSubmit, authorizationStatus, redirectToMain} = props;
+  const {onSubmit, authorizationStatus} = props;
   const loginRef = useRef();
   const passwordRef = useRef();
 
@@ -22,7 +21,7 @@ const SignIn = (props) => {
   };
 
   if (authorizationStatus === AuthorizationStatus.AUTH) {
-    return <Redirect to={AppRoute.MAIN} />
+    return <Redirect to={AppRoute.MAIN} />;
   }
 
   return (
@@ -69,10 +68,7 @@ const mapStateToProps = ({USER}) => ({
 const mapDispatchToProps = (dispatch) => ({
   onSubmit(authData) {
     dispatch(logIn(authData));
-  },
-  redirectToMain(data) {
-    dispatch(ActionCreator.redirectToRoute(data));
-  },
+  }
 });
 
 export {SignIn};
