@@ -12,8 +12,9 @@ export const adaptPlaceToClient = (place) => {
         isPremium: place.is_premium,
         maxAdults: place.max_adults,
         previewImage: place.preview_image
-      }
+      },
   );
+
   delete adaptedPlace.host.avatar_url;
   delete adaptedPlace.host.is_pro;
   delete adaptedPlace.is_favorite;

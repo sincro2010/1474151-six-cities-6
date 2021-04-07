@@ -13,7 +13,6 @@ import {fetchRoomReviews, fetchNearOffers, fetchRoom} from "../../store/api-acti
 import LoadingScreen from '../loading-screen/loading-screen';
 import ButtonIsFavorite from "../button-is-favorite/button-is-favorite";
 
-
 const Room = (props) => {
   const {
     reviews,

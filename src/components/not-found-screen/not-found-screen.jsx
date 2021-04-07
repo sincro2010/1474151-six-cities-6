@@ -2,11 +2,9 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import Header from '../header/header';
 import {AppRoute} from '../../common/const';
-import {connect} from 'react-redux';
 
-const NotFoundScreen = (props) => {
-  const {} = props;
 
+const NotFoundScreen = () => {
   return (
     <div className="page page--gray page--main">
       <Header/>
@@ -24,9 +22,6 @@ const NotFoundScreen = (props) => {
   );
 };
 
-const mapStateToProps = ({DATA}) => ({
-  message: DATA.message,
-});
 
-export {NotFoundScreen};
-export default connect(mapStateToProps, null)(NotFoundScreen);
+export default NotFoundScreen;
+
