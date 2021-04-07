@@ -57,3 +57,9 @@ export const changeFavoriteOffers = (offers, updatedPlace) => {
   return updatedPlace.isFavorite ? [updatedPlace, ...offers] : deletePlace(offers, updatedPlace);
 };
 
+export const sortingDate = (data) => {
+  return data.slice().sort((a, b) => {
+    return new Date(b.date) - new Date(a.date);
+  });
+};
+

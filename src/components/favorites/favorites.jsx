@@ -40,7 +40,7 @@ const Favorites = (props) => {
                   const OffersInFavoriteCity = favoriteOffers.filter((place) => place.city.name === city);
                   return (
                     <FavoritesCity
-                      key={index}
+                      key={city + index}
                       offers={OffersInFavoriteCity}
                       city={city}
                       placeName="FAVORITES"
